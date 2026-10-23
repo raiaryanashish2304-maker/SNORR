@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f5f4ef"><title>SNOR — Get Tuted By AI</title><meta name="description" content="Upload a study file, answer three topic questions, then get a clear SNOR learning guide and voiceover.">
+<style>
+:root{--bg:#f5f4ef;--paper:#fffefa;--ink:#26322a;--muted:#7d847a;--line:#e8e7de;--green:#1c5546;--mint:#eaf2e9;--shadow:0 14px 42px #2834290c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer;color:inherit}
+.app{min-height:100vh;display:grid;grid-template-columns:220px 1fr}.side{height:100vh;position:sticky;top:0;padding:24px 16px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:#faf9f5}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;padding:0 5px}.logo{width:34px;height:34px;border-radius:11px;background:var(--green);color:white;display:grid;place-items:center;font:21px Georgia}.brand b{display:block;font-size:13px;letter-spacing:.16em}.brand small{display:block;color:#888e84;font-size:9px;margin-top:2px}
+.side-label{font-size:9px;color:#999d94;letter-spacing:.16em;font-weight:750;margin:39px 8px 9px}.nav{display:flex;align-items:center;gap:9px;padding:10px 11px;border:0;border-radius:9px;background:transparent;color:#667067;font-size:11px;text-align:left}.nav:hover{background:#eeefe8}.nav.active{color:#244f40;background:#e9f0e8;font-weight:700}.dot{width:7px;height:7px;border-radius:3px;background:#87ad83;margin:0 4px}.space{flex:1}.note{border:1px solid var(--line);background:#fffdf8;padding:13px;border-radius:12px;margin:10px 2px 17px}.note-icon{width:25px;height:25px;border-radius:8px;background:#f5ebd9;color:#bd8541;display:grid;place-items:center;margin-bottom:8px}.note b{font-size:10px}.note p{font-size:9px;line-height:1.55;color:#83877f;margin:5px 0 0}.profile{border-top:1px solid var(--line);padding-top:14px;display:flex;gap:9px;align-items:center;font-size:10px;font-weight:700}.avatar{width:28px;height:28px;border-radius:50%;background:#eee5f2;color:#725b80;display:grid;place-items:center}.profile small{display:block;color:#999d94;font-size:8px;font-weight:450;margin-top:3px}
+main{min-width:0}.top{height:59px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,54px);font-size:10px;color:#8b9087}.top strong{color:#4a554c}.mode{padding:7px 10px;border:1px solid var(--line);background:#fbfaf6;border-radius:99px;font-size:8px;font-weight:750;color:#73786f}.mode i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#dfa34d;margin-right:6px}.mode.live i{background:#66a87b}
+.content{max-width:1380px;margin:auto;padding:31px clamp(20px,4vw,54px)}.eyebrow{font-weight:760;font-size:9px;letter-spacing:.17em;color:#6d8272}.hero{padding-bottom:22px}h1{font:500 clamp(38px,4vw,53px)/.98 Georgia,serif;letter-spacing:-.055em;margin:14px 0 10px}h1 em{color:#68866c}.subtitle{font-size:12px;color:#778076;margin:0;line-height:1.6}.tech{display:flex;gap:7px;margin-top:15px}.tag{border:1px solid var(--line);background:#faf9f4;border-radius:7px;padding:5px 8px;font-size:8px;color:#7b8178}.tag b{color:#4d5e50}
+.cols{display:grid;grid-template-columns:1fr 1.05fr;gap:15px}.card{min-width:0;border:1px solid var(--line);background:var(--paper);border-radius:15px;box-shadow:var(--shadow);overflow:hidden}.head{height:53px;border-bottom:1px solid #efeee7;padding:0 15px;display:flex;align-items:center;justify-content:space-between}.head b{font-size:10px}.head small{display:block;font-size:8px;color:#a0a39b;margin-top:3px}.text-btn{background:none;border:0;color:#64816a;font-size:9px;font-weight:700;padding:7px}.text-btn:hover{background:var(--mint);border-radius:7px}
+.inner{padding:13px}.canvas{height:clamp(280px,34vw,400px);min-height:260px;position:relative;overflow:hidden;border:1px solid #e4e3d8;border-radius:11px;background:#f0efe5}.diagram{width:100%;height:100%;display:block}.preview{width:100%;height:100%;object-fit:contain;background:#eff0e9}.flag{position:absolute;top:11px;left:11px;z-index:2;background:#fffef0e8;border:1px solid #e4e1d4;padding:6px 8px;border-radius:6px;font-size:8px;letter-spacing:.08em;font-weight:750;color:#566658}.flag i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#83aa7d;margin-right:5px}.zoom{position:absolute;z-index:2;right:10px;top:10px;width:27px;height:27px;border:1px solid #e4e1d4;border-radius:7px;background:#fffef0e8;color:#627565}.files{display:flex;align-items:center;justify-content:space-between;gap:9px;padding:12px 1px 0}.fileinfo{min-width:0;display:flex;align-items:center;gap:8px}.fileicon{width:25px;height:25px;background:#f4f1e8;border-radius:7px;display:grid;place-items:center;color:#9b8357}.filename{font-size:9px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:215px}.filesub{font-size:8px;color:#a0a39a;margin-top:3px}.actions{display:flex;gap:5px}.action{border:1px solid var(--line);background:#fffefa;border-radius:7px;padding:7px 8px;color:#68766a;font-size:8px;font-weight:650;white-space:nowrap}.action:hover{border-color:#b7cbb7;color:var(--green)}
+.tutorhead{height:53px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border-bottom:1px solid #efeee7}.person{display:flex;align-items:center;gap:8px}.bot{width:29px;height:29px;background:linear-gradient(145deg,#407260,#194838);border-radius:10px;color:white;display:grid;place-items:center}.person b{font-size:10px}.person small{display:block;color:#969b91;font-size:8px;margin-top:2px}.badge{background:#efedf8;color:#776ba0;padding:5px 7px;border-radius:6px;font-size:7px;font-weight:780;letter-spacing:.06em}.body{padding:15px 17px}.label{font-size:8px;font-weight:760;letter-spacing:.12em;color:#778b78}.idea{font:16px/1.45 Georgia,serif;color:#354539;margin:8px 0 13px}.rule{height:1px;background:#edede5;margin:13px 0}.steps{display:grid;gap:9px;margin:11px 0 13px}.step{display:grid;grid-template-columns:22px 1fr;gap:9px}.num{height:22px;width:22px;border-radius:7px;background:#eff4ed;color:#67816a;font:10px Georgia;display:grid;place-items:center}.step b{font-size:9px;display:block;margin:1px 0 3px;color:#3d4b40}.step p{font-size:9px;line-height:1.5;color:#80867d;margin:0}.answer-note{border-left:2px solid #9cbd9d;padding:1px 0 1px 10px;margin:2px 0;color:#68756b}.answer-note b{display:block;color:#526457;font-size:8px;letter-spacing:.06em;margin-bottom:3px}.answer-note p{font-size:9px;line-height:1.55;margin:0;white-space:pre-wrap}.answer-step{display:grid;grid-template-columns:22px 1fr;gap:9px}.answer-step .num{height:22px;width:22px;border-radius:7px;background:#eff4ed;color:#67816a;font:10px Georgia;display:grid;place-items:center}.answer-step p{font-size:9px;line-height:1.5;color:#68756b;margin:1px 0 0}.takeaway{background:#eff5ee;border:1px solid #e1eadf;border-radius:8px;padding:9px 10px;font-size:8px;color:#708070;line-height:1.5}.takeaway b{display:block;font-size:7px;letter-spacing:.1em;color:#5f795f;margin-bottom:3px}
+.audio{display:flex;align-items:center;gap:10px;margin-top:14px;padding:10px 12px;border:1px solid #343a3b;background:#202324;border-radius:14px}.play{flex:0 0 34px;width:34px;height:34px;border:0;border-radius:50%;background:#18606B;color:#fff;font-size:13px;display:grid;place-items:center}.audio-title{font-size:10px;font-weight:650;color:#ededed;white-space:nowrap}.audio-time{font-variant-numeric:tabular-nums;font-size:9px;color:#aaa;white-space:nowrap}.audio-seek{min-width:30px;width:100%;height:4px;margin:0;appearance:none;border:0;border-radius:99px;background:linear-gradient(to right,#18606B 0%,#18606B var(--progress,0%),#555 var(--progress,0%),#555 100%);cursor:pointer}.audio-seek::-webkit-slider-thumb{appearance:none;width:11px;height:11px;border-radius:50%;background:#18606B;border:2px solid #d7eeee}.audio-seek::-moz-range-thumb{width:9px;height:9px;border-radius:50%;background:#18606B;border:2px solid #d7eeee}.audio audio{display:none}.quiz{margin:18px 0;padding:14px;border:1px solid #343a3b;border-radius:13px;background:#1a1c1d}.quiz h3{margin:0;color:#eee;font-size:13px}.quiz-intro{margin:5px 0 12px;color:#aaa;font-size:9px;line-height:1.5}.quiz-list{display:grid;gap:10px}.quiz-item{padding:10px;border:1px solid #303536;border-radius:10px;background:#202324}.quiz-question{display:flex;gap:7px;align-items:flex-start;color:#e4e4e4;font-size:10px;line-height:1.5}.quiz-level{flex:none;padding:3px 6px;border-radius:99px;background:#203438;color:#8bc1c8;font-size:7px;font-weight:750;letter-spacing:.06em}.quiz-answer{display:block;width:100%;min-height:54px;margin-top:8px;padding:8px 9px;resize:vertical;border:1px solid #3a4142;border-radius:8px;background:#171919;color:#eee;font-size:10px;line-height:1.5;font-family:inherit}.quiz-answer::placeholder{color:#858b8b}.quiz-submit{margin-top:11px;padding:8px 12px;border:0;border-radius:8px;background:#18606B;color:white;font-size:9px;font-weight:700}.quiz-submit:disabled{opacity:.6;cursor:wait}.quiz-result{margin-top:12px;padding:12px;border:1px solid #315158;border-radius:10px;background:#192326;color:#e7eeee}.quiz-score{display:flex;align-items:baseline;gap:8px}.quiz-score strong{color:#70bdc5;font-size:25px}.quiz-score span{color:#ccc;font-size:10px}.quiz-result p{margin:8px 0;color:#c6cece;font-size:10px;line-height:1.5}.quiz-result ul{margin:5px 0 0;padding-left:17px;color:#c6cece;font-size:9px;line-height:1.6}.quiz-result h4{margin:9px 0 3px;color:#81bac0;font-size:8px;letter-spacing:.08em}.ask{margin-top:11px}.asktitle{font-size:8px;color:#858b82;font-weight:700;margin:0 0 6px}.chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}.chip{border:1px solid #ecece3;background:#fffefa;border-radius:30px;padding:5px 8px;color:#778078;font-size:7px}.chip:hover{background:#eef4ed;color:#43674d}.form{display:flex;gap:7px;align-items:center;padding:5px 5px 5px 10px;border:1px solid #e7e8df;border-radius:9px;background:#fffefa}.form:focus-within{border-color:#a8c0ab}.form input{border:0;outline:0;background:transparent;font-size:9px;min-width:0;width:100%;color:#465248}.form input::placeholder{color:#b0b2a9}.send{height:27px;width:27px;border:0;border-radius:7px;background:#e9f1e9;color:var(--green)}.status{min-height:13px;font-size:7px;color:#92978e;margin:6px 2px 0}.privacy{display:flex;justify-content:space-between;gap:12px;font-size:8px;color:#9da198;margin:14px 2px}.privacy a{color:#718976;text-decoration:none}.toast{position:fixed;z-index:10;bottom:20px;left:50%;transform:translate(-50%,10px);opacity:0;pointer-events:none;background:#233b30;color:white;border-radius:9px;padding:10px 13px;font-size:10px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.quiz[hidden]{display:none}.audio{flex-wrap:wrap}.audio-title{flex:0 0 auto}.audio-seek{flex:1 1 90px}.quiz[hidden]{display:none}.ask{margin-top:11px}.asktitle{font-size:8px;color:#858b82;font-weight:700;margin:0 0 6px}.chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}.chip{border:1px solid #ecece3;background:#fffefa;border-radius:30px;padding:5px 8px;color:#778078;font-size:7px}.chip:hover{background:#eef4ed;color:#43674d}.form{display:flex;gap:7px;align-items:center;padding:5px 5px 5px 10px;border:1px solid #e7e8df;border-radius:9px;background:#fffefa}.form:focus-within{border-color:#a8c0ab}.form input{border:0;outline:0;background:transparent;font-size:9px;min-width:0;width:100%;color:#465248}.form input::placeholder{color:#b0b2a9}.send{height:27px;width:27px;border:0;border-radius:7px;background:#e9f1e9;color:var(--green)}.status{min-height:13px;font-size:7px;color:#92978e;margin:6px 2px 0}.privacy{display:flex;justify-content:space-between;gap:12px;font-size:8px;color:#9da198;margin:14px 2px}.privacy a{color:#718976;text-decoration:none}.toast{position:fixed;z-index:10;bottom:20px;left:50%;transform:translate(-50%,10px);opacity:0;pointer-events:none;background:#233b30;color:white;border-radius:9px;padding:10px 13px;font-size:10px;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(max-width:900px){.app{grid-template-columns:185px 1fr}.side{padding:20px 12px}.content{padding:22px}.cols{grid-template-columns:1fr}.canvas{height:min(60vw,410px)}}
+@media(max-width:650px){.app{grid-template-columns:1fr}.side{height:auto;position:static;padding:10px 14px;flex-direction:row;align-items:center;justify-content:space-between;border:0;border-bottom:1px solid var(--line)}.side-label,.note,.profile,.space,.nav:not(.active){display:none}.nav.active{padding:8px 10px;font-size:9px}.nav.active .dot{display:none}.nav.active:before{content:"+";font-size:16px;margin-right:4px}.top{height:50px;padding:0 14px}.content{padding:20px 14px}.hero{padding-bottom:19px}.canvas{height:68vw;min-height:235px}.files{align-items:flex-start;flex-direction:column}.actions{align-self:flex-end;margin-top:-32px}.privacy{flex-direction:column}}
+:root{--bg:#101010;--paper:#191919;--ink:#ececec;--muted:#a1a1aa;--line:#2d2d2d;--green:#8bb8a2;--mint:#252b28;--shadow:0 12px 40px #0004}
+body{background:var(--bg);color:var(--ink)}
+.app{grid-template-columns:68px minmax(0,1fr)}
+.side{width:68px;padding:20px 9px;background:#0b0b0b;border-right:1px solid #242424;align-items:center}
+.brand{padding:0;justify-content:center}.logo{width:38px;height:38px;border-radius:13px;background:#202020;color:#f4f4f4;font:22px Georgia}.brand>span:last-child,.side-label,.note,.profile,.space{display:none}
+.nav{width:46px;height:42px;padding:8px;justify-content:center;font-size:0;color:#b8b8b8}.nav:hover,.nav.active{background:#232323;color:#fff}.nav.active .dot{background:#ddd}
+.top{height:62px;padding:0 clamp(22px,4vw,58px);border-color:#262626;color:#929292}.top strong{color:#ddd}.mode{border-color:#303030;background:#1a1a1a;color:#bbb}
+.content{max-width:1180px;padding:52px clamp(22px,5vw,72px) 28px}
+.hero{text-align:center;padding-bottom:30px}.eyebrow{color:#999;font-size:9px;letter-spacing:.18em}
+h1{font:500 clamp(30px,4vw,42px)/1.2 Inter,system-ui,sans-serif;letter-spacing:-.035em;color:#f5f5f5;margin:24px 0 10px}
+.subtitle{font-size:13px;color:#a1a1a1}.tech{justify-content:center;margin-top:17px}.tag{border-color:#303030;background:#191919;color:#a7a7a7}.tag b{color:#e1e1e1}
+.cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.card{background:#171717;border-color:#2c2c2c;border-radius:18px;box-shadow:0 12px 36px #0003}
+.head,.tutorhead{border-color:#2b2b2b}.head b,.person b{color:#ededed}.head small,.person small{color:#929292}
+.text-btn{color:#b5d5c2}.text-btn:hover{background:#252b28}
+.canvas{border-color:#333;border-radius:13px;background:#20211e}.preview{background:#20211e}.flag{background:#171817e8;border-color:#404040;color:#d0d0d0}.zoom{background:#171817e8;border-color:#404040;color:#ddd}
+.fileicon{background:#252525;color:#c4ad7c}.filename{color:#e3e3e3}.filesub{color:#999}.action{border-color:#3a3a3a;background:#202020;color:#d0d0d0}.action:hover{border-color:#697d70;color:#e5f3eb}
+.bot{background:#303d36;color:#e4f4e9}.badge{background:#29272f;color:#d0c4f3}
+.body{padding:18px}.label{color:#a8c6af}.idea{font:17px/1.55 Inter,system-ui,sans-serif;color:#e7e7e7}.rule{background:#303030}
+.num,.answer-step .num{background:#272d29;color:#b5d5c2}.step b{color:#e4e4e4}.step p,.answer-step p{color:#b4b4b4}
+.answer-note{border-color:#85ae91;color:#c4c4c4}.answer-note b{color:#c6dfcd}
+.takeaway{background:#202823;border-color:#34463a;color:#d1d8d2}.takeaway b{color:#bad4c0}
+.audio{border-color:#343434;background:#202020}.audio b{color:#e8e8e8}.audio small{color:#aaa}.wave i{background:#91b59c}.play{background:#e5e5e5;color:#151515}
+.ask{margin-top:18px}.asktitle{font-size:10px;color:#b3b3b3}.chip{border-color:#383838;background:#202020;color:#c2c2c2}.chip:hover{background:#2b302d;color:#e8f3eb}
+.form{padding:7px 7px 7px 14px;border-color:#3a3a3a;border-radius:25px;background:#222}.form:focus-within{border-color:#777}.form input{font-size:12px;color:#f0f0f0}.form input::placeholder{color:#9a9a9a}.send{height:32px;width:32px;border-radius:50%;background:#e8e8e8;color:#191919;font-size:18px}.send:disabled{opacity:.55}
+.status{font-size:9px;color:#aaa}.privacy{color:#858585}.privacy a{color:#c1d9c8}.toast{background:#e7e7e7;color:#171717}
+@media(max-width:900px){.app{grid-template-columns:60px minmax(0,1fr)}.side{width:60px;padding:16px 7px}.content{padding:38px 22px 24px}.cols{grid-template-columns:1fr}.canvas{height:min(60vw,410px)}}
+@media(max-width:650px){.app{grid-template-columns:1fr}.side{width:auto;height:56px;position:static;padding:8px 14px;flex-direction:row;align-items:center;justify-content:space-between;border:0;border-bottom:1px solid #292929}.brand{margin-right:auto}.side .nav{display:flex;width:40px;height:38px}.side .nav.active{padding:8px}.side .nav.active .dot{display:block}.side .nav.active:before{content:none}.top{height:48px;padding:0 14px}.content{padding:30px 14px 20px}.hero{padding-bottom:20px}h1{font-size:30px;margin-top:18px}.canvas{height:68vw;min-height:235px}.files{align-items:flex-start;flex-direction:column}.actions{align-self:flex-end;margin-top:-32px}.privacy{flex-direction:column}}
+:root{--green:#18606B;--mint:#203438}
+.logo,.play{background:#18606B}
+.mode.live i,.dot{background:#18606B}
+.label,.answer-note b{color:#18606B}
+.answer-note{border-color:#18606B}
+.form:focus-within{border-color:#18606B}
+.send{background:#18606B;color:#fff}
+.drop-prompt .upload-icon{color:#18606B}
+.drop-prompt.dragging{outline-color:#18606B}
+.chip:hover{background:#203438;color:#d8eff1}
+.privacy a{color:#74aab2}
+.brand b{letter-spacing:.18em}.brand small{font:italic 12px Georgia,serif;color:#b9d6c3}.drop-prompt{height:100%;min-height:260px;display:grid;align-content:center;justify-items:center;gap:10px;padding:24px;text-align:center;color:#e7e7e7}.drop-prompt[hidden]{display:none}.drop-prompt .upload-icon{width:54px;height:54px;border:1px solid #414141;border-radius:18px;display:grid;place-items:center;font-size:28px;color:#18606B}.drop-prompt strong{font-size:13px;letter-spacing:.09em}.drop-prompt small{max-width:320px;font-size:10px;line-height:1.6;color:#a7a7a7}.drop-prompt.dragging{background:#252b28;outline:2px dashed #18606B;outline-offset:-8px}
+.app.landing .content{max-width:1180px;padding:38px clamp(22px,5vw,72px) 28px}
+.app.landing .hero{display:block;text-align:center;padding-bottom:30px}
+.app.landing .cols{width:100%;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.app.landing .cols>.card:first-child{order:0}
+.app.landing .cols>.card:first-child .head,.app.landing .files{display:flex}
+.app.landing .inner{padding:13px}
+.app.landing .canvas{height:clamp(280px,34vw,400px);min-height:260px;border:1px dashed #484848;background:#1a1a1a}
+.app.landing .drop-prompt{min-height:260px}
+.app.landing .cols>.card:last-child{order:0;border:1px solid #2c2c2c;background:#171717;box-shadow:0 12px 36px #0003;overflow:hidden}
+.app.landing .tutorhead,.app.landing .body>:not(.ask),.app.landing .asktitle,.app.landing .chips{display:none}
+.app.landing .body{padding:18px}
+.app.landing .ask{margin:0}
+.app.landing .form{min-height:58px;padding:9px 10px 9px 19px;border-color:#444;border-radius:30px;background:#222}
+.app.landing .form input{font-size:15px}
+.app.landing .send{width:38px;height:38px}
+.app.landing .status:empty{display:none}
+.app:not(.landing) .status:empty{display:none}
+@media(max-width:900px){.app.landing .cols{grid-template-columns:1fr}.app.landing .canvas{height:min(60vw,410px)}}
+@media(max-width:650px){.app.landing .content{padding:30px 14px 20px}.app.landing .cols{grid-template-columns:1fr}.app.landing .canvas{height:68vw;min-height:235px}}
+</style>
+<style>
+body{position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,transparent 38%,#c6c5f07a 58%,#91d5d67a 76%,#edc4d77a 90%,#f2d9aa80 100%);clip-path:inset(100% 0 0);animation:gradient-rise 1.7s cubic-bezier(.2,.7,.2,1) forwards}
+.app{position:relative;z-index:1}
+.logo img{width:100%;height:100%;display:block;object-fit:cover;border-radius:inherit}
+#lessonContent[hidden]{display:none}
+.quiz{margin:0 0 18px;padding:16px;border:1px solid #303838;border-radius:13px;background:#1d2222}
+.quiz h3{margin:0 0 6px;color:#f2f2f2;font-size:15px}
+.quiz-intro{margin:0 0 14px;color:#aaa;font-size:11px;line-height:1.5}
+.quiz-list{display:grid;gap:10px}
+.quiz-item{padding:12px;border:1px solid #303838;border-radius:10px;background:#191d1d}
+.quiz-question{display:grid;gap:7px;color:#eee;font-size:12px;line-height:1.45}
+.quiz-level{color:#82bdc2;font-size:8px;font-weight:750;letter-spacing:.12em}
+.quiz-answer{width:100%;min-height:62px;margin-top:9px;padding:9px;border:1px solid #383f3f;border-radius:8px;background:#141818;color:#eee;font:inherit;font-size:12px;line-height:1.5;resize:vertical}
+.quiz-submit{margin-top:12px;padding:10px 14px;border:0;border-radius:8px;background:#18606B;color:white;font-size:11px;font-weight:700}
+.quiz-submit:disabled{opacity:.55;cursor:wait}
+.quiz-result{margin-top:14px;padding:13px;border-radius:10px;background:#202b2b;color:#ddd;font-size:11px;line-height:1.6}
+.quiz-score{display:flex;align-items:baseline;gap:10px}.quiz-score strong{color:#9dd7d8;font-size:20px}.quiz-score span{color:#eee;font-weight:700}
+.quiz-result h4{margin:12px 0 5px;color:#a5d4d6;font-size:9px;letter-spacing:.1em}
+.quiz-result ul{margin:0;padding-left:18px}
+#uploaded{display:none!important}
+.drop-prompt{gap:10px}
+.prompt-title{max-width:390px;color:#f2f2f2;font-size:13px;font-weight:700;line-height:1.4}
+.prompt-buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;max-width:530px}
+.prompt-chip{border:1px solid #383f3f;border-radius:99px;background:#222;color:#d2d2d2;padding:7px 10px;font-size:10px;line-height:1.3}
+.prompt-chip:hover,.prompt-chip[aria-pressed=true]{border-color:#18606B;background:#203438;color:#e8fbfc}
+.voiceover{display:flex;align-items:center;gap:10px;margin-top:12px}
+.voiceover button{border:0;border-radius:8px;background:#18606B;color:#fff;padding:9px 12px;font-size:10px;font-weight:700}
+.voiceover button:disabled{opacity:.6}
+.voiceover-status{font-size:9px;color:#aaa}
+.voiceover audio{width:min(100%,420px);height:38px}
+.voiceover{flex-wrap:wrap}
+.app{grid-template-columns:minmax(0,1fr)}
+.side{display:none!important}
+.drop-prompt .upload-icon{width:42px;height:42px;border-radius:14px}
+.prompt-buttons{gap:6px}
+.prompt-chip{padding:6px 9px;font-size:9px}
+.prompt-more summary{color:#aeb4b4;font-size:9px;cursor:pointer;list-style:none}
+.prompt-more summary::-webkit-details-marker{display:none}
+.prompt-more[open]{display:grid;gap:7px}
+.prompt-more .prompt-buttons{max-width:520px}
+.app.landing .canvas{height:clamp(270px,26vw,320px);min-height:270px}
+.app.landing .canvas.showing-prompts{height:auto;overflow:visible}
+.app.landing .canvas.showing-prompts .drop-prompt{height:auto}
+@media(max-width:650px){.app.landing .canvas{height:auto;min-height:300px}.app.landing .drop-prompt{height:auto;min-height:290px}}
+@keyframes gradient-rise{to{clip-path:inset(0)}}
+@media(prefers-reduced-motion:reduce){body::before{clip-path:none;animation:none}}
+</style></head><body>
+<div class="app"><aside class="side"><a class="brand" href="#"><span class="logo">m</span><span><b>MIRA</b><small>your visual field tutor</small></span></a><div class="side-label">YOUR SPACE</div><button class="nav" id="newLesson"><span style="font-size:17px">＋</span> New lesson</button><div class="side-label" style="margin-top:29px">RECENT</div><button class="nav active" id="sampleLesson"><span class="dot"></span> Photosynthesis</button><div class="space"></div><div class="note"><div class="note-icon">✳</div><b>A little more clarity.</b><p>Turn the page you’re stuck on into a lesson that sticks.</p></div><div class="profile"><span class="avatar">Y</span><span>Your study space<small>Ready when you are</small></span></div></aside>
+<main><header class="top"><span>Workspace　<span style="color:#c7c9c0">/</span>　<strong>Study room</strong></span><span class="mode" id="mode"><i></i><span id="modeText">DEMO MODE</span></span></header>
+<div class="content"><section class="hero"><div class="eyebrow">SNOR STUDY SPACE</div><h1 id="welcomeHeading">What can we explore today?</h1><p class="subtitle">Upload a study file and let SNOR turn it into a clear learning guide.</p><div class="tech"><span class="tag">G　<b>Gemma 4</b>　<span id="gemmaStatus">sample lesson</span></span><span class="tag">♪　<b>Voiceover</b>　<span id="voiceStatus">browser voice</span></span></div></section>
+<div class="cols"><section class="card"><div class="head"><span><b>Your study material</b><small>A clear view makes a better lesson</small></span><button class="text-btn" id="replace">Replace image ↗</button></div><div class="inner"><div class="canvas" id="zone" tabindex="0" role="button" aria-label="Choose an image or drag one here"><span class="flag"><i></i><span id="artTag">SAMPLE DIAGRAM</span></span><button class="zoom" id="zoom" aria-label="View larger">⌕</button>
+<svg class="diagram" id="art" viewBox="0 0 720 510" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated photosynthesis diagram"><defs><linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a8c584"/><stop offset="1" stop-color="#608a68"/></linearGradient><pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#d8d7c7"/></pattern><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="#789777"/></marker></defs><rect width="720" height="510" fill="#f2f1e7"/><rect width="720" height="510" fill="url(#dots)"/><text x="34" y="43" fill="#576b58" font-size="10" font-family="system-ui" font-weight="700" letter-spacing="2">BIOLOGY / PLANT SYSTEMS</text><text x="34" y="76" fill="#2e3e32" font-size="27" font-family="Georgia">Photosynthesis</text><text x="35" y="96" fill="#879083" font-size="10" font-family="system-ui">How a leaf makes its own food</text><path d="M230 249c-55-27-91-99-65-124 20-19 67 7 90 49 34-46 92-65 108-42 18 24-17 86-72 112-23 11-42 13-61 5Z" fill="url(#leaf)" stroke="#58795e" stroke-width="2"/><path d="M242 244c31-39 54-77 88-112m-63 82-59-15m83-21-42-29m64-1 26-23m-49 69 49 12m-89 12 38 26" fill="none" stroke="#e5eccd" stroke-width="2" stroke-linecap="round"/><path d="M180 156 127 123m222 44 71-4m-176 117-2 52m113-87 56 30" fill="none" stroke="#829a7d" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arr)"/><circle cx="114" cy="147" r="21" fill="#f1c56f"/><g stroke="#dda354" stroke-width="2"><path d="M114 117v-8m0 76v-8m-30-30h-8m76 0h-8m-51-21-6-6m55 55-6-6m0-43 6-6m-55 55 6-6"/></g><text x="91" y="182" fill="#a17d49" font-size="10" font-family="system-ui">sunlight</text><g font-family="system-ui" font-size="10" fill="#546653"><rect x="421" y="148" width="124" height="31" rx="8" fill="#fffef7" stroke="#dfe3d5"/><text x="432" y="168">carbon dioxide</text><rect x="169" y="326" width="82" height="30" rx="8" fill="#fffef7" stroke="#dfe3d5"/><text x="191" y="345">water</text><rect x="397" y="272" width="115" height="30" rx="8" fill="#fffef7" stroke="#dfe3d5"/><text x="409" y="291">sugar + oxygen</text></g><text x="277" y="293" fill="#859083" font-size="8" font-family="system-ui">chlorophyll</text><path d="M60 397h600" stroke="#dedfce"/><text x="60" y="424" fill="#738170" font-size="9" font-family="system-ui" font-weight="700" letter-spacing="1">THE SIMPLE EQUATION</text><rect x="60" y="440" width="145" height="34" rx="8" fill="#fffef7" stroke="#e2e2d6"/><text x="132" y="462" text-anchor="middle" fill="#64735e" font-size="10" font-family="system-ui">light + water</text><text x="217" y="463" fill="#899184" font-size="14">+</text><rect x="238" y="440" width="145" height="34" rx="8" fill="#fffef7" stroke="#e2e2d6"/><text x="310" y="462" text-anchor="middle" fill="#64735e" font-size="10" font-family="system-ui">carbon dioxide</text><path d="M398 457h24" stroke="#87947f" marker-end="url(#arr)"/><rect x="437" y="440" width="150" height="34" rx="8" fill="#edf4e9" stroke="#dbe7d8"/><text x="512" y="462" text-anchor="middle" fill="#58765d" font-size="10" font-family="system-ui" font-weight="700">glucose + oxygen</text><text x="660" y="490" text-anchor="end" fill="#9b9e91" font-size="8" font-family="system-ui">MIRA FIELD NOTES · 01</text></svg><img id="uploaded" class="preview" alt="Uploaded study material" hidden></div>
+<div class="files"><div class="fileinfo"><span class="fileicon">▤</span><span style="min-width:0"><div class="filename" id="fileName">photosynthesis-field-notes.svg</div><div class="filesub" id="fileSub">Sample diagram · ready to explore</div></span></div><div class="actions"><button class="action" id="trySample">✳ Try sample</button><button class="action" id="upload">↥ Upload</button></div></div></div></section>
+<section class="card"><div class="tutorhead"><div class="person"><span class="bot">✳</span><span><b>Mira · your tutor</b><small id="responseLabel">A visual breakdown, just for you</small></span></div><span class="badge" id="badge">SAMPLE LESSON</span></div><div class="body"><div class="label">✳　THE BIG IDEA</div><p class="idea" id="idea">A leaf is a tiny solar-powered kitchen: it turns light, water and carbon dioxide into sugar and oxygen.</p><div class="rule"></div><div class="label">A QUICK WALK-THROUGH</div><div class="steps" id="steps"><div class="step"><span class="num">01</span><div><b>Catch the light</b><p>Chlorophyll inside the leaf absorbs sunlight. Think of it as the energy switch that starts the process.</p></div></div><div class="step"><span class="num">02</span><div><b>Bring in the ingredients</b><p>Water travels up from the roots. Carbon dioxide slips in through tiny pores on the leaf.</p></div></div><div class="step"><span class="num">03</span><div><b>Make and share the food</b><p>The leaf uses that energy to make glucose, a sugar the plant can use. Oxygen is released back into the air.</p></div></div></div><div class="takeaway" id="takeaway"><b>KEEP THIS IN YOUR POCKET</b><span id="equation">Light + water + carbon dioxide → glucose + oxygen</span></div>
+<section class="quiz" id="quizArea" hidden aria-labelledby="quizTitle"></section>
+<div class="audio" id="audioArea"><button class="play" id="listen" aria-label="Play explanation">▶</button><span class="audio-title">Listen to explanation</span><span class="audio-time" id="audioTime">0:00</span><input class="audio-seek" id="audioSeek" type="range" min="0" max="1000" value="0" aria-label="Seek audio"><span class="audio-time" id="audioDuration">0:00</span><audio id="player" preload="none" aria-label="Spoken explanation"></audio><span id="audioStatus" class="sr" aria-live="polite">Ready</span></div>
+<div class="ask"><p class="asktitle">What’s on your mind?</p><div class="chips"><button class="chip" data-q="Explain it more simply">Explain more simply</button><button class="chip" data-q="Quiz me on this topic">Quiz me</button><button class="chip" data-q="Why does this matter?">Why does this matter?</button></div><form class="form" id="form"><label class="sr" for="question">Ask Mira</label><input id="question" maxlength="500" placeholder="Ask Mira about this lesson…"><button class="send" id="send" aria-label="Send">↑</button></form><div class="status" id="status" aria-live="polite"></div></div></div></section></div>
+<div class="privacy"><span>Your study file is analyzed to create pre-lesson questions and a learning guide.</span><span>Browser voiceover · no AI credits</span></div></div></main></div>
+<input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" hidden><div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id),lesson={idea:"A leaf is a tiny solar-powered kitchen: it turns light, water and carbon dioxide into sugar and oxygen.",steps:[["Catch the light","Chlorophyll inside the leaf absorbs sunlight. Think of it as the energy switch that starts the process."],["Bring in the ingredients","Water travels up from the roots. Carbon dioxide slips in through tiny pores on the leaf."],["Make and share the food","The leaf uses that energy to make glucose, a sugar the plant can use. Oxygen is released back into the air."]],equation:"Light + water + carbon dioxide → glucose + oxygen"};
+let sample=true,imageData=null,gemma=false,elevenLabs=false,voiceoverAudioUrl=null;
+const welcomeHeadings=["Where would you like to start?","What’s on your mind?","What can we explore today?","How can I help you today?","What would you like to discover?","Let’s start with an idea.","What are you curious about?","What shall we figure out today?","Bring your ideas to life.","What can we create together?"];
+$("welcomeHeading").textContent=welcomeHeadings[Math.floor(Math.random()*welcomeHeadings.length)];
+$("idea").previousElementSibling.textContent="SIMPLE EXPLANATION";$("steps").previousElementSibling.textContent="KEY POINTS";
+async function getStatus(){try{const r=await fetch("/api/status");if(r.ok){const d=await r.json();gemma=!!d.gemma;elevenLabs=!!d.elevenLabs;$("modeText").textContent=gemma?"LIVE GEMMA 4":"API KEY REQUIRED";$("mode").classList.toggle("live",gemma);$("gemmaStatus").textContent=gemma?"connected":"add key in .env";$("voiceStatus").textContent=elevenLabs?"ElevenLabs ready":"browser voice"}}catch{}}
+function stopAudio(){if("speechSynthesis"in window)window.speechSynthesis.cancel();if(voiceoverAudioUrl)URL.revokeObjectURL(voiceoverAudioUrl);voiceoverAudioUrl=null}
+function reset(){sample=true;imageData=null;$("art").hidden=false;$("uploaded").hidden=true;$("uploaded").removeAttribute("src");$("artTag").textContent="SAMPLE DIAGRAM";$("fileName").textContent="photosynthesis-field-notes.svg";$("fileSub").textContent="Sample diagram · ready to explore";$("idea").textContent=lesson.idea;$("steps").innerHTML=lesson.steps.map((s,i)=>'<div class="step"><span class="num">0'+(i+1)+'</span><div><b>'+s[0]+'</b><p>'+s[1]+'</p></div></div>').join("");$("equation").textContent=lesson.equation;$("takeaway").querySelector("b").textContent="KEEP THIS IN YOUR POCKET";$("takeaway").hidden=false;$("badge").textContent="SAMPLE LESSON";$("responseLabel").textContent="A visual breakdown, just for you";$("status").textContent="";narration="A leaf is like a tiny solar-powered kitchen. It catches sunlight, takes in water and carbon dioxide, and uses them to make sugar for the plant. Oxygen is released into the air.";stopAudio()}
+function cleanTutorText(value){return String(value||"").replace(/\$\s*\\rightarrow\s*\$/g," → ").replace(/\\rightarrow/g,"→").replace(/\$/g,"").replace(/\*\*/g,"").replace(/__/g,"").replace(/^\s*[-*]\s+/gm,"").trim()}
+function parseTutorAnswer(text){
+ const sections={};const free=[];let current="",inCodeBlock=false;
+ const aliases={"BIG IDEA":"SIMPLE EXPLANATION","SIMPLE EXPLANATION":"SIMPLE EXPLANATION","HOW IT WORKS":"KEY POINTS"};
+ for(const raw of String(text||"").split(/\r?\n/)){
+  const line=raw.trim();if(/^```/.test(line)){inCodeBlock=!inCodeBlock;continue}if(inCodeBlock)continue;
+  const match=line.match(/^(?:[-*]\s+)?(?:#{1,3}\s*)?(?:\*{1,2}\s*)?(SIMPLE EXPLANATION|BIG IDEA|KEY POINTS|HOW IT WORKS|QUIZ QUESTIONS|KEY WORDS|REMEMBER|QUICK CHECK)(?:\*{1,2})?\s*:?\s*(.*)$/i);
+  if(match){current=aliases[match[1].toUpperCase()]||match[1].toUpperCase();sections[current]=match[2]?[match[2]]:[];continue}
+  if(current){sections[current].push(line)}else if(line){free.push(line)}
+ }
+ const fallback=cleanTutorText(free.join(" "))||cleanTutorText(text);
+ const explanation=cleanTutorText((sections["SIMPLE EXPLANATION"]||[]).join(" "))||fallback.split(/(?<=[.!?])\s+/)[0]||fallback;
+ const pointsText=(sections["KEY POINTS"]||[]).join("\n")||(sections["KEY WORDS"]||[]).join("\n")||(sections["HOW IT WORKS"]||[]).join("\n");
+ let points=pointsText.split(/\n+/).map(line=>cleanTutorText(line.replace(/^\s*(?:\d+[.)]|[-*])\s*/,""))).filter(Boolean);
+ if(points.length===1&&points[0].length>180)points=points[0].split(/(?<=[.!?])\s+/).filter(Boolean);
+ if(!points.length&&fallback)points=fallback.split(/(?<=[.!?])\s+/).slice(1,5).filter(Boolean);
+ const remember=cleanTutorText((sections["REMEMBER"]||[]).join(" "));
+ const check=cleanTutorText((sections["QUICK CHECK"]||[]).join(" "));
+ return{explanation:explanation||"I could not find a clear explanation in the response.",points:points.slice(0,5),remember,check};
+}
+function renderSnorQuiz(questions){
+ const area=$("quizArea");area.replaceChildren();area.hidden=false;
+ const title=document.createElement("h3");title.id="quizTitle";title.textContent="A quick check-in";area.append(title);
+ const intro=document.createElement("p");intro.className="quiz-intro";intro.textContent="Answer one topic question at each level. Then SNOR will show your learning guide and feedback.";area.append(intro);
+ if(!Array.isArray(questions)||questions.length!==3||!["EASY","MEDIUM","HARD"].every(level=>questions.some(item=>item.difficulty===level&&item.question))){
+  intro.textContent="SNOR could not prepare all three quiz questions for this lesson. Ask about the topic again to try once more.";
+  area.hidden=true;return;
+ }
+ const form=document.createElement("form");form.id="quizForm";const list=document.createElement("div");list.className="quiz-list";
+ questions.forEach((item,index)=>{
+  const card=document.createElement("div");card.className="quiz-item";
+  const label=document.createElement("label");label.className="quiz-question";label.htmlFor="quizAnswer"+index;
+  const level=document.createElement("span");level.className="quiz-level";level.textContent=item.difficulty;
+  const question=document.createElement("span");question.textContent=item.question;label.append(level,question);
+  const input=document.createElement("textarea");input.className="quiz-answer";input.id="quizAnswer"+index;input.name=item.difficulty;input.maxLength=2000;input.placeholder="Write your answer…";input.setAttribute("aria-label",item.difficulty+" difficulty answer");
+  card.append(label,input);list.append(card);
+ });
+ const submit=document.createElement("button");submit.className="quiz-submit";submit.type="submit";submit.textContent="See my lesson and score";
+ form.append(list,submit);area.append(form);
+}
+function showAnswer(text,label){
+ const answer=parseTutorAnswer(text);$("idea").textContent=answer.explanation;$("idea").previousElementSibling.textContent="SIMPLE EXPLANATION";$("steps").previousElementSibling.textContent="KEY POINTS";$("steps").replaceChildren();
+ answer.points.forEach((point,i)=>{const row=document.createElement("div");row.className="answer-step";const number=document.createElement("span");number.className="num";number.textContent=String(i+1).padStart(2,"0");const copy=document.createElement("div");const paragraph=document.createElement("p");paragraph.textContent=point;copy.append(paragraph);row.append(number,copy);$("steps").append(row)});
+ if(answer.check)addTutorNote("QUICK CHECK",answer.check);
+ $("takeaway").hidden=!answer.remember;if(answer.remember){$("takeaway").querySelector("b").textContent="REMEMBER";$("equation").textContent=answer.remember}
+ $("badge").textContent=label;$("responseLabel").textContent="Based on your uploaded file";
+ stopAudio()
+}
+function addTutorNote(title,body){const note=document.createElement("div");note.className="answer-note";const heading=document.createElement("b");heading.textContent=title;const paragraph=document.createElement("p");paragraph.textContent=body;note.append(heading,paragraph);$("steps").append(note)}
+function demo(q){
+ q=q.toLowerCase();
+ if(q.includes("quiz")||q.includes("test"))return"SIMPLE EXPLANATION: Photosynthesis helps a plant make the sugar it needs.\nKEY POINTS:\n- Sunlight provides energy.\n- Water and carbon dioxide are the ingredients.\n- The leaf makes sugar and releases oxygen.\nVISUAL REPRESENTATION:\nSunlight + water + carbon dioxide\n              ↓\n       sugar + oxygen\nQUICK CHECK: What does sunlight help the leaf make?";
+ if(q.includes("simpl")||q.includes("easy"))return"SIMPLE EXPLANATION: A leaf is like a tiny kitchen. Sunlight powers it to turn water and carbon dioxide into sugar.\nKEY POINTS:\n- The plant uses sugar as food.\n- Oxygen is released into the air.\nVISUAL REPRESENTATION:\nSunlight + water + carbon dioxide\n              ↓\n         leaf makes sugar";
+ if(q.includes("why")||q.includes("matter"))return"SIMPLE EXPLANATION: Photosynthesis lets plants make food so they can grow.\nKEY POINTS:\n- Plants store energy in sugar.\n- The process also releases oxygen into the air.\nVISUAL REPRESENTATION:\nCarbon dioxide + water + light\n              ↓\n        plant food + oxygen";
+ return"SIMPLE EXPLANATION: A leaf uses sunlight to make food from water and carbon dioxide.\nKEY POINTS:\n- Sunlight supplies energy for the process.\n- The leaf makes glucose, a kind of sugar.\n- Oxygen is released into the air.\nVISUAL REPRESENTATION:\nSunlight + water + carbon dioxide\n              ↓\n        glucose + oxygen";
+}
+function samplePng(){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(new Blob([$("art").outerHTML],{type:"image/svg+xml"})),img=new Image();img.onload=()=>{const c=document.createElement("canvas");c.width=1440;c.height=1020;c.getContext("2d").drawImage(img,0,0,1440,1020);URL.revokeObjectURL(url);resolve(c.toDataURL("image/png"))};img.onerror=()=>reject(Error("Could not prepare sample image."));img.src=url})}
+async function ask(q){if(!q.trim())return;$("send").disabled=true;$("status").textContent=gemma?"Mira is reading your page…":"Preparing a sample reply…";try{if(gemma){const image=imageData||await samplePng(),r=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({imageDataUrl:image,question:q})}),d=await r.json();if(!r.ok)throw Error(d.error||"Gemma could not analyze the image.");showAnswer(d.text,"GEMMA 4 ANALYSIS");$("status").textContent="Grounded in your image."}else if(sample){await new Promise(r=>setTimeout(r,350));showAnswer(demo(q),"SAMPLE TUTOR");$("status").textContent="Sample reply · add keys for live image analysis."}else $("status").textContent="Add GOOGLE_API_KEY to enable Gemma analysis. Your image stays in this browser."}catch(e){$("status").textContent=e.message}finally{$("send").disabled=false}}
+function listen(){}
+function openFile(f){if(!f)return;if(!/^image\/(png|jpeg|webp)$/.test(f.type)){alert("Choose a PNG, JPG or WebP image.");return}if(f.size>10*1024*1024){alert("Choose an image under 10 MB.");return}const r=new FileReader();r.onload=()=>{sample=false;imageData=r.result;$("art").hidden=true;$("uploaded").src=imageData;$("uploaded").hidden=false;$("artTag").textContent="YOUR UPLOAD";$("fileName").textContent=f.name;$("fileSub").textContent=(f.size/1048576).toFixed(2)+" MB · ready to explore";$("idea").textContent=gemma?"Ask about this image.":"Your page is ready. Add a Gemma 4 API key for a live explanation.";$("steps").innerHTML="";$("takeaway").hidden=true;$("badge").textContent=gemma?"GEMMA 4 READY":"IMAGE READY";$("responseLabel").textContent="Ask Mira about this image";$("status").textContent=gemma?"Image ready for analysis.":"Demo mode · add GOOGLE_API_KEY to analyze.";stopAudio()};r.readAsDataURL(f)}
+const fi=$("fileInput"),zone=$("zone");$("upload").onclick=()=>fi.click();$("replace").onclick=()=>fi.click();$("newLesson").onclick=()=>fi.click();$("trySample").onclick=reset;$("sampleLesson").onclick=reset;fi.onchange=e=>{openFile(e.target.files[0]);fi.value=""};zone.onclick=e=>{if(!e.target.closest("button"))fi.click()};zone.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();fi.click()}};["dragenter","dragover"].forEach(n=>zone.addEventListener(n,e=>{e.preventDefault();zone.style.outline="2px solid #76a37d"}));["dragleave","drop"].forEach(n=>zone.addEventListener(n,e=>{e.preventDefault();zone.style.outline=""}));zone.addEventListener("drop",e=>openFile(e.dataTransfer.files[0]));$("form").onsubmit=e=>{e.preventDefault();const q=$("question").value.trim();$("question").value="";ask(q)};document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>ask(b.dataset.q));$("listen").onclick=listen;$("player").onended=()=>$("audioArea").classList.remove("playing");$("zoom").onclick=e=>{e.stopPropagation();const overlay=document.createElement("div");overlay.style.cssText="position:fixed;inset:0;z-index:9;background:#17231dde;display:grid;place-items:center;padding:22px";overlay.innerHTML=sample?'<div style="width:min(1000px,95vw);background:#f2f1e7">'+$("art").outerHTML+"</div>":'<img src="'+$("uploaded").src+'" style="max-width:95vw;max-height:90vh">';overlay.onclick=()=>overlay.remove();document.body.append(overlay)};getStatus();
+</script><script>
+(()=>{
+ const app=document.querySelector(".app"),quizArea=$("quizArea"),bodyArea=quizArea.parentElement,lessonContent=document.createElement("div");
+ lessonContent.id="lessonContent";
+ while(bodyArea.firstElementChild&&bodyArea.firstElementChild!==quizArea)lessonContent.append(bodyArea.firstElementChild);
+ bodyArea.insertBefore(lessonContent,bodyArea.children[1]);
+ bodyArea.insertBefore(quizArea,lessonContent);
+ $("audioArea").replaceChildren();$("audioArea").hidden=true;
+ let quizId="",quizQuestions=[];
+ app.classList.add("landing");
+ document.title="SNOR — Get Tuted By AI";
+ document.querySelector(".brand .logo").innerHTML='<img src="/assets/snor-logo.png" alt="SNOR">';
+ document.querySelector(".brand b").textContent="SNOR";
+ document.querySelector(".brand small").textContent="Get Tuted By AI";
+ document.querySelector(".brand small").style.fontFamily="Georgia,serif";
+ document.querySelector(".brand small").style.fontStyle="italic";
+ document.querySelector(".eyebrow").textContent="SNOR STUDY SPACE";
+ document.querySelector(".subtitle").textContent="Upload a study file and let SNOR turn it into a clear learning guide.";
+ document.querySelector(".head b").textContent="Add your study material";
+ document.querySelector(".head small").textContent="PDF, DOCX, TXT, PNG, JPG or WebP · up to 14 MB";
+ $("replace").textContent="Upload another";
+ $("upload").textContent="Choose file";
+ $("trySample").remove();
+ $("sampleLesson").remove();
+ document.querySelectorAll(".side-label").forEach(label=>label.remove());
+ $("newLesson").innerHTML='<span style="font-size:17px">＋</span> Upload file';
+ $("newLesson").classList.add("active");
+ $("fileInput").accept=".pdf,.docx,.txt,.png,.jpg,.jpeg,.webp,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,image/png,image/jpeg,image/webp";
+ $("question").placeholder="Choose a question above or ask SNOR…";
+ document.querySelector('label[for="question"]').textContent="Ask SNOR";
+ document.querySelector(".privacy > span").textContent="Your study file is analyzed to create pre-lesson questions and a learning guide.";
+ document.querySelector(".privacy > span:last-child").textContent="Browser voiceover · no AI credits";
+ document.querySelector('meta[name="description"]').content="Upload a study file, answer three topic questions, then get a clear SNOR learning guide and voiceover.";
+ $("art").remove();
+ $("artTag").parentElement.remove();
+ $("zoom").hidden=true;
+ let zone=$("zone");const freshZone=zone.cloneNode(true);zone.replaceWith(freshZone);zone=freshZone;
+ const dropPrompt=document.createElement("div");
+ zone.setAttribute("aria-label","Choose a starter question and add your study material");zone.setAttribute("role","group");zone.removeAttribute("tabindex");
+ dropPrompt.id="dropPrompt";dropPrompt.className="drop-prompt";
+ dropPrompt.innerHTML='<span class="upload-icon" aria-hidden="true">↑</span><div class="prompt-title" id="promptTitle">Choose a starting question, then upload or drop your study file</div><div class="prompt-buttons" id="promptButtons"></div><small>Click anywhere here to choose a file, or drag and drop it · PDF, DOCX, TXT, PNG, JPG or WebP</small>';
+ const starterPrompts=["Tell me about this","Explain me this","Explain important topics",...welcomeHeadings];
+ const promptButtons=dropPrompt.querySelector("#promptButtons");let selectedPrompt="";
+ const addPromptButton=(container,prompt)=>{
+  const button=document.createElement("button");button.type="button";button.className="prompt-chip";button.textContent=prompt;button.dataset.q=prompt;button.setAttribute("aria-pressed","false");container.append(button);
+ };
+ starterPrompts.slice(0,3).forEach(prompt=>addPromptButton(promptButtons,prompt));
+ const morePrompts=document.createElement("details");morePrompts.className="prompt-more";
+ const moreSummary=document.createElement("summary");moreSummary.textContent="More starting questions";morePrompts.append(moreSummary);
+ const morePromptButtons=document.createElement("div");morePromptButtons.className="prompt-buttons";welcomeHeadings.forEach(prompt=>addPromptButton(morePromptButtons,prompt));morePrompts.append(morePromptButtons);dropPrompt.append(morePrompts);
+ morePrompts.addEventListener("toggle",()=>zone.classList.toggle("showing-prompts",morePrompts.open));
+ document.querySelector(".ask .chips").remove();
+ zone.prepend(dropPrompt);
+ $("fileName").textContent="No file selected";
+ $("fileSub").textContent="PDF, DOCX, TXT, PNG, JPG or WebP · up to 14 MB";
+ document.querySelector(".person b").textContent="SNOR · your AI tutor";
+ $("responseLabel").textContent="Your personal study tutor";
+ $("badge").textContent="READY FOR UPLOAD";
+ $("idea").textContent="Upload a study file to get started.";
+ $("steps").previousElementSibling.textContent="YOUR LEARNING ROADMAP";
+ $("steps").replaceChildren();
+ $("takeaway").hidden=true;lessonContent.hidden=true;
+ $("audioArea").hidden=true;
+ let selectedDataUrl=null,selectedText="",selectedKind="";
+ sample=false;imageData=null;
+ const reset=()=>{
+  selectedDataUrl=null;selectedText="";selectedKind="";imageData=null;sample=false;quizId="";quizQuestions=[];selectedPrompt="";
+  document.querySelector(".app").classList.add("landing");$("question").value="";
+  $("uploaded").hidden=true;$("uploaded").removeAttribute("src");$("uploaded").alt="Uploaded study material";
+  $("dropPrompt").hidden=false;
+  $("zoom").hidden=true;$("fileName").textContent="No file selected";
+  $("fileSub").textContent="PDF, DOCX, TXT, PNG, JPG or WebP · up to 14 MB";
+  $("idea").textContent="Upload a study file to get started.";
+  $("steps").replaceChildren();$("quizArea").hidden=true;$("quizArea").replaceChildren();$("takeaway").hidden=true;lessonContent.hidden=true;$("audioArea").hidden=true;
+  $("badge").textContent="READY FOR UPLOAD";$("responseLabel").textContent="Your personal study tutor";
+  $("status").textContent="";stopAudio();
+ };
+ async function extractDocx(file){
+  const bytes=await file.arrayBuffer(),view=new DataView(bytes);let eocd=-1;
+  for(let i=view.byteLength-22;i>=Math.max(0,view.byteLength-65557);i--){if(view.getUint32(i,true)===0x06054b50){eocd=i;break}}
+  if(eocd<0)throw Error("This DOCX file is not a valid Word document.");
+  const count=view.getUint16(eocd+10,true);let cursor=view.getUint32(eocd+16,true);
+  for(let i=0;i<count;i++){
+   if(view.getUint32(cursor,true)!==0x02014b50)throw Error("Could not read this DOCX document.");
+   const method=view.getUint16(cursor+10,true),compressedSize=view.getUint32(cursor+20,true);
+   const nameLength=view.getUint16(cursor+28,true),extraLength=view.getUint16(cursor+30,true),commentLength=view.getUint16(cursor+32,true);
+   const localOffset=view.getUint32(cursor+42,true),name=new TextDecoder().decode(new Uint8Array(bytes,cursor+46,nameLength));
+   if(name==="word/document.xml"){
+    const localNameLength=view.getUint16(localOffset+26,true),localExtraLength=view.getUint16(localOffset+28,true);
+    const start=localOffset+30+localNameLength+localExtraLength,compressed=new Uint8Array(bytes,start,compressedSize);
+    let xmlBytes;
+    if(method===0)xmlBytes=compressed;
+    else if(method===8)xmlBytes=new Uint8Array(await new Response(new Blob([compressed]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer());
+    else throw Error("This DOCX compression format is not supported.");
+    const xml=new DOMParser().parseFromString(new TextDecoder().decode(xmlBytes),"application/xml");
+    if(xml.querySelector("parsererror"))throw Error("Could not read the text in this DOCX file.");
+    const ns="http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+    return Array.from(xml.getElementsByTagNameNS(ns,"p"),paragraph=>Array.from(paragraph.getElementsByTagNameNS(ns,"t"),node=>node.textContent||"").join("")).filter(Boolean).join("\n").trim();
+   }
+   cursor+=46+nameLength+extraLength+commentLength;
+  }
+  throw Error("This Word document does not contain readable syllabus text.");
+ }
+ async function openFile(file){
+  if(!file)return;
+  const name=file.name.toLowerCase(),isImage=/^image\/(png|jpeg|webp)$/.test(file.type)||/\.(png|jpe?g|webp)$/.test(name);
+  const isPdf=file.type==="application/pdf"||name.endsWith(".pdf");
+  const isDocx=file.type==="application/vnd.openxmlformats-officedocument.wordprocessingml.document"||name.endsWith(".docx");
+  const isTxt=file.type==="text/plain"||name.endsWith(".txt");
+  if(!isImage&&!isPdf&&!isDocx&&!isTxt){$("status").textContent="Choose a PDF, DOCX, TXT, PNG, JPG or WebP file.";return}
+  if(file.size>14*1024*1024){$("status").textContent="This file is over 14 MB. Choose a smaller syllabus or image.";return}
+  $("send").disabled=true;$("status").textContent=isDocx?"Reading Word document…":"Preparing your upload…";
+  try{
+   selectedDataUrl=null;selectedText="";selectedKind=isImage?"image":isPdf?"pdf":"syllabus";
+   if(isTxt){selectedText=(await file.text()).trim();if(!selectedText)throw Error("This text file is empty.")}
+   else if(isDocx){selectedText=await extractDocx(file);if(!selectedText)throw Error("No readable text was found in this Word document.")}
+   else selectedDataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(Error("Could not read this file."));reader.readAsDataURL(file)});
+   if(selectedText.length>60000)throw Error("This document has too much text. Upload a shorter syllabus (under 60,000 characters).");
+   $("fileName").textContent=file.name;$("fileSub").textContent=(file.size/1048576).toFixed(2)+" MB · ready for SNOR";
+   $("dropPrompt").hidden=false;
+   $("promptTitle").textContent=file.name+" is ready. Choose a question or add your own.";
+   $("uploaded").hidden=true;$("uploaded").alt="";$("uploaded").removeAttribute("src");
+   $("zoom").hidden=true;$("idea").textContent=gemma?"Your file is ready. Choose a question to create your pre-lesson quiz.":"Your file is ready. Add GOOGLE_API_KEY to .env to generate its learning roadmap.";
+   $("steps").replaceChildren();$("takeaway").hidden=true;lessonContent.hidden=true;$("quizArea").hidden=true;$("quizArea").replaceChildren();quizId="";quizQuestions=[];$("audioArea").hidden=true;
+   $("badge").textContent=gemma?"READY FOR SNOR":"API KEY REQUIRED";$("responseLabel").textContent="Upload ready for AI analysis";
+   $("status").textContent=gemma?"Creating three questions to check what you already know…":"Add GOOGLE_API_KEY to .env to create pre-lesson questions.";
+   stopAudio();
+   if(gemma)await ask(selectedPrompt);
+  }catch(error){reset();$("status").textContent=error.message}
+  finally{$("send").disabled=false}
+ }
+ async function ask(question){
+  if(!selectedDataUrl&&!selectedText){$("status").textContent="Upload a study file first.";return}
+  if(!gemma){$("status").textContent="Add GOOGLE_API_KEY to .env to generate a lesson from your upload.";return}
+  $("send").disabled=true;$("status").textContent="SNOR is creating three topic questions before the lesson…";
+  try{
+   const defaultQuestion=selectedKind==="image"?"Create three pre-lesson questions about the main topic in this study image.":"Create three pre-lesson questions about the main topics in this syllabus.";
+   const response=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({assetDataUrl:selectedDataUrl,fileText:selectedText,question:question||defaultQuestion})});
+   const result=await response.json();if(!response.ok)throw Error(result.error||"SNOR could not analyze this upload.");
+   if(typeof result.quizId!=="string"||!Array.isArray(result.questions))throw Error("SNOR did not return valid pre-lesson questions.");
+   quizId=result.quizId;quizQuestions=result.questions;renderSnorQuiz(quizQuestions);
+   app.classList.remove("landing");lessonContent.hidden=true;
+   $("badge").textContent="PRE-LESSON QUIZ";$("responseLabel").textContent="Start with what you already know";
+   $("status").textContent="Answer these three questions, then see your learning guide and feedback.";
+  }catch(error){$("status").textContent=error.message}
+  finally{$("send").disabled=false}
+ }
+ window.openFile=openFile;window.ask=ask;
+ $("upload").onclick=()=>$("fileInput").click();$("replace").onclick=()=>$("fileInput").click();$("newLesson").onclick=reset;
+ $("fileInput").onchange=event=>{openFile(event.target.files[0]);event.target.value=""};
+ zone.onclick=event=>{if(!event.target.closest("button,summary,details"))$("fileInput").click()};
+ ["dragenter","dragover"].forEach(type=>zone.addEventListener(type,event=>{event.preventDefault();dropPrompt.classList.add("dragging")}));
+ ["dragleave","drop"].forEach(type=>zone.addEventListener(type,event=>{event.preventDefault();dropPrompt.classList.remove("dragging")}));
+ zone.addEventListener("drop",event=>openFile(event.dataTransfer.files[0]));
+ $("form").onsubmit=event=>{event.preventDefault();const question=$("question").value.trim();$("question").value="";ask(question)};
+ document.querySelectorAll(".chip").forEach(button=>button.onclick=()=>ask(button.dataset.q));
+ dropPrompt.addEventListener("click",event=>{
+  const button=event.target.closest(".prompt-chip");if(!button)return;
+  selectedPrompt=button.dataset.q;
+  dropPrompt.querySelectorAll(".prompt-chip").forEach(item=>item.setAttribute("aria-pressed",String(item===button)));
+  $("question").value=selectedPrompt;
+  if(selectedDataUrl||selectedText)ask(selectedPrompt);
+  else $("status").textContent="Question selected. Upload a study file to create your pre-lesson questions.";
+ });
+ $("quizArea").addEventListener("submit",async event=>{
+  if(event.target.id!=="quizForm")return;
+  event.preventDefault();
+  const form=event.target,button=form.querySelector(".quiz-submit");
+  const answers=quizQuestions.map(item=>({difficulty:item.difficulty,response:form.elements[item.difficulty].value.trim()}));
+  button.disabled=true;button.textContent="Checking your answers…";
+  try{
+   const response=await fetch("/api/grade",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({quizId,answers})});
+   const result=await response.json();if(!response.ok)throw Error(result.error||"SNOR could not grade your answers.");
+   const panel=document.createElement("section");panel.className="quiz-result";panel.setAttribute("aria-live","polite");
+   const score=document.createElement("div");score.className="quiz-score";const value=document.createElement("strong");value.textContent=result.score+"/100";const rating=document.createElement("span");rating.textContent=result.rating;score.append(value,rating);
+   const feedback=document.createElement("p");feedback.textContent=result.feedback;
+   const heading=document.createElement("h4");heading.textContent="AREAS TO REVIEW";
+   const list=document.createElement("ul");result.improvements.forEach(item=>{const entry=document.createElement("li");entry.textContent=item;list.append(entry)});
+   panel.append(score,feedback);if(result.improvements.length)panel.append(heading,list);
+   const voiceover=document.createElement("div");voiceover.className="voiceover";
+   const playVoiceover=document.createElement("button");playVoiceover.type="button";playVoiceover.textContent=elevenLabs?"Generate voiceover":"Play browser voiceover";
+   const voiceoverStatus=document.createElement("span");voiceoverStatus.className="voiceover-status";voiceoverStatus.setAttribute("aria-live","polite");voiceoverStatus.textContent=elevenLabs?"Generates audio with ElevenLabs when you choose to play it.":"Uses the browser's built-in speech; no AI credits.";
+   const lesson=parseTutorAnswer(result.text);
+   const voiceoverText=["Your result: "+result.score+" out of 100. "+result.rating+".",result.feedback,result.improvements.length?"Key areas to improve: "+result.improvements.join(". "):"",lesson.explanation?"Lesson summary: "+lesson.explanation:"",lesson.points.length?"Key points: "+lesson.points.join(". "):""].filter(Boolean).join(" ");
+   playVoiceover.onclick=async()=>{
+    playVoiceover.disabled=true;
+    try{
+     if(elevenLabs){
+      voiceoverStatus.textContent="Generating voiceover… This uses ElevenLabs credits.";
+      const response=await fetch("/api/speak",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text:voiceoverText})});
+      if(!response.ok){const error=await response.json().catch(()=>({}));throw Error(error.error||"ElevenLabs could not generate the voiceover.")}
+      const audioBlob=await response.blob();
+      if(!audioBlob.size)throw Error("ElevenLabs returned an empty voiceover.");
+      if(voiceoverAudioUrl)URL.revokeObjectURL(voiceoverAudioUrl);
+      voiceover.querySelectorAll("audio").forEach(player=>{player.pause();player.remove()});
+      voiceoverAudioUrl=URL.createObjectURL(audioBlob);
+      const audio=document.createElement("audio");audio.controls=true;audio.src=voiceoverAudioUrl;audio.setAttribute("aria-label","Quiz rating and learning guide voiceover");voiceover.append(audio);
+      audio.addEventListener("play",()=>{voiceoverStatus.textContent="Playing voiceover…"});
+      audio.addEventListener("ended",()=>{voiceoverStatus.textContent="Voiceover finished."});
+      audio.addEventListener("error",()=>{voiceoverStatus.textContent="The generated voiceover could not be played."});
+      await audio.play();playVoiceover.textContent="Regenerate voiceover";voiceoverStatus.textContent="Playing voiceover…";
+     }else if("speechSynthesis"in window&&"SpeechSynthesisUtterance"in window){
+      window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(voiceoverText);utterance.rate=.95;
+      utterance.onstart=()=>{playVoiceover.textContent="Play again";voiceoverStatus.textContent="Playing browser voiceover…"};
+      utterance.onend=()=>{voiceoverStatus.textContent="Voiceover finished."};
+      utterance.onerror=()=>{voiceoverStatus.textContent="Voiceover could not be played in this browser."};
+      window.speechSynthesis.speak(utterance);
+     }else{voiceoverStatus.textContent="Voiceover is not supported in this browser."}
+    }catch(error){voiceoverStatus.textContent=error.message}
+    finally{playVoiceover.disabled=false}
+   };
+   voiceover.append(playVoiceover,voiceoverStatus);panel.append(voiceover);
+   form.replaceWith(panel);showAnswer(result.text,"SNOR LEARNING GUIDE");lessonContent.hidden=false;
+   $("responseLabel").textContent=selectedKind==="syllabus"?"Syllabus-based learning roadmap":"Based on your uploaded file";
+   $("badge").textContent="LEARNING GUIDE";$("status").textContent="Here is your lesson and feedback based on your answers.";
+   quizId="";
+  }catch(error){button.disabled=false;button.textContent="Try again";$("status").textContent=error.message}
+ });
+ $("zoom").onclick=event=>event.stopPropagation();
+})();
+</script></body></html>
